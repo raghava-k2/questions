@@ -4,6 +4,7 @@ from .models import UserDetails
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.contrib.auth import authenticate, login
 
 
 class UserView(viewsets.ModelViewSet):
@@ -21,9 +22,9 @@ def userLogin(req):
     try:
         User.objects.get(username=req.data['username'])
         user = authenticate(
-            request, username=req.data['username'], password=req.data['password'])
+            req, username=req.data['username'], password=req.data['password'])
         if user is not None:
-            login(request, user)
+            login(req, user)
         else:
             raise Exception('Passowrd doesnt match')
     except User.DoesNotExist as e:
