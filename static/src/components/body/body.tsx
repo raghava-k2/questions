@@ -7,14 +7,14 @@ export default class Body extends Component {
     render() {
         return (
             <main>
-                <Container>
+                <Container fluid={true}>
                     <Row>
-                        <Col sm='6'>
+                        <Col sm='10'>
                             <section>
                                 <QuestionsList />
                             </section>
                         </Col>
-                        <Col sm='6'>
+                        <Col sm='2'>
                             <section>
                                 <TableTop />
                             </section>

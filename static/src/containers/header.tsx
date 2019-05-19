@@ -1,21 +1,19 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Header from '../components/header/header';
-import QuestionsList from '../components/question/questionList';
-class Home extends Component {
+export class HeaderContainer extends Component {
     render() {
         return (
             <Fragment>
                 <Header {...this.props} />
-                <QuestionsList {...this.props} />
             </Fragment>
         )
     }
 }
 const mapStateToProps = (state: any) => {
-    return { questions: state.questionsList }
+    return {}
 }
 const mapDispatchToProps = (dispatch: any) => {
     return {}
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
