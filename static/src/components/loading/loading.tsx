@@ -5,7 +5,7 @@ export default class Loading extends Component {
     render() {
         return (
             <div className='loading'>
-                <Spinner animation="border" role="status">
+                <Spinner animation="border" role="status" style={{color:'white'}}>
                     <span className="sr-only">Loading...</span>
                 </Spinner>
             </div>

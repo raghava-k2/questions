@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Login from '../components/login/login';
 import Loading from './loading';
-import { loginUser } from '../actions/login';
+import { loginUser} from '../actions/login';
 class LoginContainer extends Component {
     render() {
         return (
@@ -18,7 +18,7 @@ const mapStateToProps = (state: any) => {
 }
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        loginUser: (loginInfo: any) => { dispatch(loginUser(loginInfo)) }
+        loginUser: (loginInfo: any, history: any) => { dispatch(loginUser(loginInfo, history)) }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

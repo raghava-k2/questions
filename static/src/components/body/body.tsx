@@ -6,22 +6,20 @@ import './body.css'
 export default class Body extends Component {
     render() {
         return (
-            <main>
-                <Container fluid={true}>
-                    <Row>
-                        <Col sm='10'>
-                            <section>
-                                <QuestionsList />
-                            </section>
-                        </Col>
-                        <Col sm='2'>
-                            <section>
-                                <TableTop />
-                            </section>
-                        </Col>
-                    </Row>
-                </Container>
-            </main>
+            <Container fluid={true}>
+                <Row>
+                    <Col sm='10'>
+                        <section>
+                            <QuestionsList />
+                        </section>
+                    </Col>
+                    <Col sm='2'>
+                        <section>
+                            <TableTop />
+                        </section>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }

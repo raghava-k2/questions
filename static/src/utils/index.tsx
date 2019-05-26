@@ -10,4 +10,20 @@ const RouteWithSubRoutes = (route: any) => {
             )} />
     );
 }
-export { RouteWithSubRoutes }
+class Util {
+    static checkForKey(obj: any, key: string, defaultValue?: string) {
+        if (obj.hasOwnProperty(key)) {
+            if (Util.getType(obj[key]) === 'Object') {
+                return Object.values(obj).join(',');
+            }
+            else {
+                return obj[key];
+            }
+        }
+        return defaultValue;
+    }
+    static getType(obj: any) {
+        return obj ? obj.constructor.name : null;
+    }
+}
+export { RouteWithSubRoutes, Util }
