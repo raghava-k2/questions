@@ -39,3 +39,16 @@ export const logoutUser = (history: any) => {
         });
     }
 }
+
+export const isUserActive = () => {
+    return (dispatch: any, state: any) => {
+        dispatch({ type: 'REQ_IS_PROCESSING', flag: true });
+        axios.get('/api/v1/isactive/').then(res => {
+            dispatch({ type: 'REQ_IS_PROCESSING', flag: false });
+            dispatch({ type: 'USER_HEADER_DETAILS', flag: true, name: res.data });
+        }).catch((e: any) => {
+            dispatch({ type: 'REQ_IS_PROCESSING', flag: false });
+            dispatch({ type: 'USER_HEADER_DETAILS', flag: false, name: '' });
+        });
+    }
+}

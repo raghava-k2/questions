@@ -23,6 +23,9 @@ export default class Login extends Component {
         }
     }
     render() {
+        if(this.props.headerInfo.isUserLoggedIn){
+            this.props.history.push('/');
+        }
         return (
             <Jumbotron fluid>
                 <Container className='r-login-form'>

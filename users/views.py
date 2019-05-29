@@ -2,8 +2,9 @@ from rest_framework import viewsets
 from .serializers import UserSerializer, UserDetailsSerialize
 from .models import UserDetails
 from django.contrib.auth.models import User
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import authenticate, login, logout
 import datetime
 import logging
@@ -22,6 +23,7 @@ class UserDetailsView(viewsets.ModelViewSet):
 
 
 @api_view(['POST'])
+@permission_classes((AllowAny,))
 def userLogin(req):
     try:
         User.objects.get(username=req.data['username'])
@@ -41,6 +43,7 @@ def userLogin(req):
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def userLogout(req):
     try:
         logout(req)
@@ -51,7 +54,14 @@ def userLogout(req):
         return Response(status=200)
 
 
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def isUserActive(req):
+    return Response(status=200,data=req.user.__str__())
+
+
 @api_view(['POST'])
+@permission_classes((AllowAny,))
 def registerUser(req):
     logger.info('Registration data : {}'.format(req.data))
     user = None

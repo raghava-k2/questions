@@ -3,6 +3,9 @@ import { Navbar, Nav, Form, Button, DropdownButton, Dropdown, ButtonGroup } from
 import { Link } from 'react-router-dom';
 import './header.css'
 export default class Header extends Component {
+    componentDidMount() {
+        this.props.isUserActive();
+    }
     logout = (e) => {
         e.preventDefault();
         this.props.logoutUser(this.props.history);
