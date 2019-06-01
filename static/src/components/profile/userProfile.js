@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
-import { UserInfo } from '../userInfo/userInfo';
 import { ChangePassword } from '../changePassword/changePassword';
 import QuestionsList from '../question/questionList';
+import RegistrationContainer from '../../containers/registration'
 export class UserProfile extends Component {
     constructor(props) {
         super(props)
@@ -14,8 +14,8 @@ export class UserProfile extends Component {
                 id="profile-tab"
                 activeKey={this.state.key}
                 onSelect={key => this.setState({ key })}>
-                <Tab eventKey="profile" title="Profile">
-                    <UserInfo></UserInfo>
+                <Tab eventKey="details" title="Details">
+                    <RegistrationContainer update={true}></RegistrationContainer>
                 </Tab>
                 <Tab eventKey="changepwd" title="Change Password">
                     <ChangePassword></ChangePassword>

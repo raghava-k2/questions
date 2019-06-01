@@ -6,3 +6,13 @@ export const login = (state: any = { error: false, errorMsg: '' }, action: any) 
             return state;
     }
 }
+export const userInfo = (state: any = {}, action: any) => {
+    switch (action.type) {
+        case 'UPDATE_USER_DETAILS':
+            return Object.assign({}, state, action.data);
+        case 'CLEAR_USER_DETAILS':
+            return Object.assign({});
+        default:
+            return state;
+    }
+}

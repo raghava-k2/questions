@@ -16,6 +16,9 @@ class Util {
             if (Util.getType(obj[key]) === 'Object') {
                 return Object.values(obj).join(',');
             }
+            else if(!obj[key].trim().length){
+                return defaultValue;
+            }
             else {
                 return obj[key];
             }

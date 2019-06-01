@@ -5,9 +5,12 @@ from django.contrib.auth.models import User
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from django.contrib.auth import authenticate, login, logout
+from rest_framework.views import APIView
 import datetime
 import logging
+import collections
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +23,32 @@ class UserView(viewsets.ModelViewSet):
 class UserDetailsView(viewsets.ModelViewSet):
     serializer_class = UserDetailsSerialize
     queryset = UserDetails.objects.all()
+
+
+class User_View(APIView):
+    authentication_classes = (SessionAuthentication, BasicAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, req):
+        userObj = User.objects.get(username=req.user.__str__())
+        userDetailsObj = UserDetails.objects.get(user=userObj)
+        responseData = collections.OrderedDict()
+        responseData['email'] = userObj.email
+        responseData['dateOfBirth'] = userDetailsObj.date_of_birth
+        responseData['gender'] = userDetailsObj.gender
+        return Response(status=200, data=responseData)
+
+    def put(self, req):
+        userObj = User.objects.get(username=req.user.__str__())
+        userDetailsObj = UserDetails.objects.get(user=userObj)
+        userObj.email = req.data['email']
+        userDetailsObj.date_of_birth = datetime.datetime.strptime(
+            req.data['dateOfBirth'], '%Y-%m-%dT%H:%M:%S.%fZ').date()
+        userDetailsObj.gender = req.data['gender']
+        userDetailsObj.updated_date = datetime.datetime.now()
+        userObj.save()
+        userDetailsObj.save()
+        return Response(status=200, data="Successfully updated user profile.")
 
 
 @api_view(['POST'])
@@ -57,7 +86,7 @@ def userLogout(req):
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def isUserActive(req):
-    return Response(status=200,data=req.user.__str__())
+    return Response(status=200, data=req.user.__str__())
 
 
 @api_view(['POST'])
@@ -78,7 +107,7 @@ def registerUser(req):
         logger.error('Exception while creating the user: %s', e, exc_info=1)
         if user is not None:
             user.delete()
-        return Response(status=500, data=e)
+        return Response(status=500, data=e.__str__())
     else:
         return Response(status=200)
 

@@ -1,10 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Jumbotron, Container, Form, Button, Alert } from 'react-bootstrap'
 import { Calendar } from 'react-calendar'
+import './registration.css'
 export class Registration extends Component {
     constructor(props) {
         super(props)
         this.state = { validate: false, dateOfBirth: '', calendarValue: new Date(), showCalendar: false, gender: '' }
+    }
+    componentDidMount() {
+        this.props.genericDispatch({ type: 'REG_VALIDATION_ERROR', data: { errorType: '', error: false, errorMsg: '' } });
+        this.props.genericDispatch({ type: 'CLEAR_USER_DETAILS' });
+        if (this.props.update) {
+            this.props.userDetails();
+        }
+    }
+    componentDidUpdate(prevProps) {
+        if (['email', 'dateOfBirth', 'gender'].some(item => {
+            return this.props.userInfo[item] !== prevProps.userInfo[item];
+        })) {
+            const DOB = new Date(this.props.userInfo.dateOfBirth);
+            this.setState({ dateOfBirth: DOB.toLocaleDateString(), calendarValue: DOB, gender: this.props.userInfo.gender });
+            this.email.value = this.props.userInfo.email;
+        }
     }
     getCalndarValue = (value) => {
         this.setState({ showCalendar: false, calendarValue: value, dateOfBirth: value.toLocaleDateString() })
@@ -18,33 +35,39 @@ export class Registration extends Component {
             this.setState((state, props) => {
                 return { validate: true }
             });
-        else {
-            this.props.regUser({ username: this.username.value, password: this.password.value, email: this.email.value, gender: this.state.gender, dateOfBirth: this.state.calendarValue.toJSON() })
+        else if (this.props.update) {
+            this.props.updateUserDetails({ email: this.email.value, gender: this.state.gender, dateOfBirth: this.state.calendarValue.toJSON() });
+        } else {
+            this.props.regUser({ username: this.username.value, password: this.password.value, email: this.email.value, gender: this.state.gender, dateOfBirth: this.state.calendarValue.toJSON() });
         }
     }
     render() {
         return (
             <Jumbotron fluid>
-                <Container className='r-login-form'>
+                <Container className={this.props.update ? 'update-reg-details' : 'r-login-form'}>
                     <Form noValidate
                         validated={this.state.validate}
                         onSubmit={this.submit}
                         style={{ minWidth: 300 }}>
-                        {this.props.register.error && <Alert variant='danger'>
+                        {this.props.register.error && <Alert variant={this.props.register.errorType}>
                             {this.props.register.errorMsg}
                         </Alert>}
-                        <Form.Group controlId="formUsername">
-                            <Form.Label>User Name</Form.Label>
-                            <Form.Control type="text" placeholder="User Name" ref={e => this.username = e} required />
-                        </Form.Group>
-                        <Form.Group controlId="formPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" ref={e => this.password = e} required />
-                        </Form.Group>
-                        <Form.Group controlId="formConfirmPassword">
-                            <Form.Label>Confitm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm Password" ref={e => this.confirmPassword = e} required />
-                        </Form.Group>
+                        {!this.props.update &&
+                            <Fragment>
+                                <Form.Group controlId="formUsername">
+                                    <Form.Label>User Name</Form.Label>
+                                    <Form.Control type="text" placeholder="User Name" ref={e => this.username = e} required />
+                                </Form.Group>
+                                <Form.Group controlId="formPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Password" ref={e => this.password = e} required />
+                                </Form.Group>
+                                <Form.Group controlId="formConfirmPassword">
+                                    <Form.Label>Confitm Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Confirm Password" ref={e => this.confirmPassword = e} required />
+                                </Form.Group>
+                            </Fragment>
+                        }
                         <div>
                             <Form.Label>Gender</Form.Label>
                         </div>
@@ -63,7 +86,7 @@ export class Registration extends Component {
                         </Form.Group>
                         {this.state.showCalendar && <Calendar value={this.state.calendarValue} onChange={this.getCalndarValue}></Calendar>}
                         <Button variant="primary" type="submit">
-                            Register
+                            {this.props.update ? 'Update' : 'Register'}
                         </Button>
                     </Form>
                 </Container>
