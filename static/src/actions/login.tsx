@@ -54,6 +54,19 @@ export const updateUserDetails = (updatedInfo: any) => {
     }
 }
 
+export const updatePassword = (updatedInfo: any) => {
+    return (dispatch: any, state: any) => {
+        dispatch({ type: 'REQ_IS_PROCESSING', flag: true });
+        axios.put('/api/v1/chng/', updatedInfo).then(res => {
+            dispatch({ type: 'REQ_IS_PROCESSING', flag: false });
+            dispatch({ type: 'ADD_ERROR_MESSAGE', data: { errorType: 'success', showError: true, errorMsg: Util.checkForKey(res, 'data', 'Please contact Admin') } })
+        }).catch((e: any) => {
+            dispatch({ type: 'REQ_IS_PROCESSING', flag: false });
+            dispatch({ type: 'ADD_ERROR_MESSAGE', data: { errorType: 'danger', showError: true, errorMsg: Util.checkForKey(e.response, 'data', 'Please contact Admin') } })
+        });
+    }
+}
+
 export const logoutUser = (history: any) => {
     return (dispatch: any, state: any) => {
         dispatch({ type: 'REQ_IS_PROCESSING', flag: true });

@@ -4,4 +4,5 @@ import { login, userInfo } from './login'
 import { loading } from './loading'
 import { registration } from './registration'
 import { headerInfo } from './header'
-export default combineReducers({ questionsList, login, loading, registration, headerInfo, userInfo })
+import { error } from './generic'
+export default combineReducers({ questionsList, login, loading, registration, headerInfo, userInfo, error });

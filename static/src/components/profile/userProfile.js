@@ -6,7 +6,7 @@ import RegistrationContainer from '../../containers/registration'
 export class UserProfile extends Component {
     constructor(props) {
         super(props)
-        this.state = { key: 'profile' }
+        this.state = { key: 'details' }
     }
     render() {
         return (
@@ -18,7 +18,7 @@ export class UserProfile extends Component {
                     <RegistrationContainer update={true}></RegistrationContainer>
                 </Tab>
                 <Tab eventKey="changepwd" title="Change Password">
-                    <ChangePassword></ChangePassword>
+                    <ChangePassword {...this.props}></ChangePassword>
                 </Tab>
                 <Tab eventKey="questions" title="Questions">
                     <QuestionsList></QuestionsList>

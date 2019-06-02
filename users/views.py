@@ -83,6 +83,18 @@ def userLogout(req):
         return Response(status=200)
 
 
+@api_view(['PUT'])
+@permission_classes((IsAuthenticated,))
+def userPasswordChange(req):
+    userObj = User.objects.get(username=req.user.__str__())
+    if userObj.check_password(req.data['currentPassword']):
+        userObj.set_password(req.data['newPassword'])
+        userObj.save()
+        return Response(status=200, data="Successfully updated the password.")
+    else:
+        return Response(status=403, data='Current Password didnt match.')
+
+
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def isUserActive(req):
