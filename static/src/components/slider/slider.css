@@ -1,0 +1,87 @@
+.r-slider{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 100000;
+    bottom: 0px;
+    left: 50%;
+    border: 1px solid rgba(0,0,0,.125);
+    transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1) 0s;
+}
+.r-slider .r-slider-container{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: darkslategrey;
+}
+.r-slider .r-slider-header{
+    padding: 20px;
+    min-height: 100px;
+    color: white;
+    background-color: cornflowerblue;
+}
+.r-slider .r-slider-body{
+    position:absolute;
+    top:100px;
+    bottom:50px;
+    width:100%;
+    overflow: scroll;
+}
+.r-slider .r-slider-footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 10px;
+    min-height:50px;
+    background: aliceblue;
+}
+.r-slider-overlay{
+    position: fixed;
+    z-index: 1000;
+    top:0px;
+    left:0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 1;
+    transition: opacity 0.3s ease 0s;
+}
+.r-cross-button{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    right: 8px;
+    top: 8px;
+}
+.r-cross-button > span{
+    position: absolute;
+    top: 6px;
+    right: 14px;
+}
+.r-cross-button > span > span:first-child{
+    position: absolute;
+    width: 3px;
+    height: 14px;
+    transform: rotate(45deg);
+    background: #f8f9fa;
+}
+.r-cross-button > span > span:last-child{
+    position: absolute;
+    width: 3px;
+    height: 14px;
+    transform: rotate(-45deg);
+    background: #f8f9fa;
+}
+.r-cross-button > button{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    font-size: 0px;
+    background: transparent;
+    cursor: pointer;
+}
