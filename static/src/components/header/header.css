@@ -1,4 +1,8 @@
-.router-link > a{
+.router-link>a {
     color: inherit;
     text-decoration: unset;
+}
+
+.center-align {
+    text-align: center;
 }

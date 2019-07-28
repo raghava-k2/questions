@@ -1,0 +1,27 @@
+.ask-question {
+    border-radius: 50%;
+    background: #b8860b;
+    border: 20px solid #f5deb3;
+    box-shadow: 0px 0px 10px #5f9ea0;
+    line-height: 0;
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    bottom: 20px;
+    right: 30px;
+    animation: ripple 2s infinite;
+}
+
+.ask-question>span {
+    color: white;
+    font-size: 30px;
+}
+
+@keyframes ripple {
+    0% {
+        box-shadow:  0 0 0 2em rgba(101, 255, 120, 0.3);
+    }
+    100% {
+        box-shadow:  0 0 0 5em rgba(101, 255, 120, 0);
+    }
+}

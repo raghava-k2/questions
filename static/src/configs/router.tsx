@@ -2,6 +2,7 @@ import Body from "../components/body/body";
 import LoginContainer from "../containers/login";
 import RegistrationContainer from "../containers/registration";
 import ProfileContainer from "../containers/profile";
+import CreateQuestion from "../components/createQuestion/createQuestion";
 
 const routes = [
     {
@@ -16,6 +17,9 @@ const routes = [
     }, {
         path: '/user/profile',
         component: ProfileContainer
+    }, {
+        path: '/create/question',
+        component: CreateQuestion
     }
 ];
 export default routes

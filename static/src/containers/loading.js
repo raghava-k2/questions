@@ -13,7 +13,4 @@ class LoadingContainer extends Component {
 const mapStateToProps = (state) => {
     return { loading: state.loading }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {}
-}
-export default connect(mapStateToProps, mapDispatchToProps)(LoadingContainer)
+export default connect(mapStateToProps)(LoadingContainer)

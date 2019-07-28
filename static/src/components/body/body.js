@@ -3,15 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import QuestionsList from '../question/questionList';
 import TableTop from '../rank/tableTop';
 import './body.css'
+import { AskQuestion } from '../askQuestion/askQuestion';
 export default class Body extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { showSlider: false };
-    }
-    showManageColumns = (e) => {
-        e.preventDefault();
-        this.setState({ showSlider: true })
-    }
     render() {
         return (
             <Container fluid={true}>
@@ -27,6 +20,7 @@ export default class Body extends Component {
                         </section>
                     </Col>
                 </Row>
+                <AskQuestion/>
             </Container>
         );
     }

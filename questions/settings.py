@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'users',
+    'question',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,7 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'questions.wsgi.application'
-#'rest_framework.authentication.BasicAuthentication',
+# 'rest_framework.authentication.BasicAuthentication',
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
