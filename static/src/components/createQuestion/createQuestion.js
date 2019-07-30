@@ -19,8 +19,8 @@ class CreateQuestion extends Component {
         }
     }
     generateQuestionObject = () => {
-        const { name, problem, code, expected } = this;
-        return { name: name.value, problem: problem.value, code: JSON.stringify(code.value), expected: expected.value };
+        const { title, problem, code, expected } = this;
+        return { title: title.value, problem: problem.value, code: code.value, expected: expected.value };
     }
     render() {
         const { error = {} } = this.props;
@@ -35,7 +35,7 @@ class CreateQuestion extends Component {
                         </Alert>}
                         <Form.Group controlId="question-name">
                             <Form.Label>Question Title</Form.Label>
-                            <Form.Control type="text" placeholder="Title of the Question..." ref={name => this.name = name} required />
+                            <Form.Control type="text" placeholder="Title of the Question..." ref={name => this.title = name} required />
                         </Form.Group>
                         <Form.Group controlId="problem-statement">
                             <Form.Label>Problem statement</Form.Label>
