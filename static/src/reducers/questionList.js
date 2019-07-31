@@ -1,4 +1,4 @@
-const questionsList = (state = [], action) => {
+const questionsList = (state = {}, action) => {
     switch (action.type) {
         case 'LIST_OF_QUESTIONS':
             return action.data;

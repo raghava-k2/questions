@@ -10,10 +10,10 @@ export const createQuestion = (questionInfo) => {
     }
 }
 
-export const questionsList = () => {
+export const questionsList = (pageNo = 1) => {
     return (dispatch) => {
         dispatch({ type: 'REQ_IS_PROCESSING', flag: true });
-        axios.get('/api/v1/question/create/?format=json').then(res => {
+        axios.get(`/api/v1/question/create/?format=json&page=${pageNo}`).then(res => {
             dispatch({ type: 'REQ_IS_PROCESSING', flag: false });
             dispatch({ type: 'LIST_OF_QUESTIONS', data: res.data });
         }).catch((e) => {
