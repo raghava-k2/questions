@@ -10,19 +10,28 @@ class QuestionsList extends Component {
         questionsList();
     }
     fetch = (e, paginationType) => {
+        e.preventDefault();
         const { questionsList, questions } = this.props;
         const { next, previous } = questions;
-        e.preventDefault();
         switch (paginationType) {
             case 'previous':
-                questionsList(previous.split('page=')[1]);
+                if (previous)
+                    questionsList(previous.split('page=')[1]);
                 break;
             case 'next':
-                questionsList(next.split('page=')[1]);
+                if (next)
+                    questionsList(next.split('page=')[1]);
                 break;
             default:
                 break;
         }
+    }
+    showQuestionDetails = (e, questionObj) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const { history } = this.props;
+        const { _id, title } = questionObj;
+        history.push(`/question/${_id}/${encodeURI(title)}`);
     }
     render() {
         const { questions } = this.props;
@@ -31,8 +40,8 @@ class QuestionsList extends Component {
             <Fragment>
                 <ListGroup>
                     {results.map((question) => (
-                        <ListGroup.Item action href={``} key={question['_id']}>
-                            {question.title}
+                        <ListGroup.Item action key={question['_id']}>
+                            <h3 onClick={e => this.showQuestionDetails(e, question)}>{question.title}</h3>
                         </ListGroup.Item>
                     ))}
                 </ListGroup>

@@ -3,6 +3,7 @@ import LoginContainer from "../containers/login";
 import RegistrationContainer from "../containers/registration";
 import ProfileContainer from "../containers/profile";
 import CreateQuestion from "../components/createQuestion/createQuestion";
+import ViewQuestion from "../components/viewQuestion/viewQuestion";
 
 const routes = [
     {
@@ -20,6 +21,9 @@ const routes = [
     }, {
         path: '/create/question',
         component: CreateQuestion
+    }, {
+        path: '/question/:id/:title',
+        component: ViewQuestion
     }
 ];
 export default routes

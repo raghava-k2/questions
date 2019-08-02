@@ -14,3 +14,15 @@ class Question(models.Model):
 
     class Meta:
         db_table = 'questions'
+
+
+class Comments(models.Model):
+    _id = ObjectIdField(primary_key=True)
+    body = models.TextField()
+    questions = models.ForeignKey(Question, on_delete=models.CASCADE,related_name='comments')
+
+    def __str__(self):
+        return 'Comment Id : {},Question : {}'.format(self._id, self.questions)
+
+    class Meta:
+        db_table = 'comments'

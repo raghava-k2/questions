@@ -6,10 +6,10 @@ const questionsList = (state = {}, action) => {
             return state;
     }
 }
-const question = (state, action) => {
+const question = (state = {}, action) => {
     switch (action.type) {
         case 'QUESTION_DETAILS':
-            return state;
+            return action.data;
         default:
             return state;
     }

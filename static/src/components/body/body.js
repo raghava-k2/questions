@@ -11,16 +11,16 @@ export default class Body extends Component {
                 <Row>
                     <Col sm='10'>
                         <section>
-                            <QuestionsList />
+                            <QuestionsList {...this.props} />
                         </section>
                     </Col>
                     <Col sm='2'>
                         <section>
-                            <TableTop />
+                            <TableTop {...this.props} />
                         </section>
                     </Col>
                 </Row>
-                <AskQuestion/>
+                <AskQuestion />
             </Container>
         );
     }
