@@ -85,23 +85,35 @@ REST_FRAMEWORK = {
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+'''mongodb://questions_dev:<password>@questionscluster-shard-00-00-0a60a.mongodb.net:27017,
+questionscluster-shard-00-01-0a60a.mongodb.net:27017,
+questionscluster-shard-00-02-0a60a.mongodb.net:27017/test?ssl=true&replicaSet=QuestionsCluster-shard-0&authSource=admin&retryWrites=true&w=majority'''
+''' mongodb+srv://questions_dev:<password>@questionscluster-0a60a.mongodb.net/test '''
+''' mongodb+srv://questions_dev:<password>@cluster0-vjtpx.gcp.mongodb.net/test?retryWrites=true&w=majority ?retryWrites=true&w=majority'''
 
+# DATABASES = {
+#     # 'default': {
+#     #     'ENGINE': 'django.db.backends.sqlite3',
+#     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     # }
+#     # 'default': {
+#     #     'ENGINE': 'djongo',
+#     #     'ENFORCE_SCHEMA': False,
+#     #     'NAME': 'questions',
+#     #     'HOST': 'localhost',
+#     #     'PORT': 27017,
+#     #     'USER': '',
+#     #     'PASSWORD': '',
+#     # }
+# }
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
     'default': {
         'ENGINE': 'djongo',
         'ENFORCE_SCHEMA': False,
         'NAME': 'questions',
-        'HOST': 'localhost',
-        'PORT': 27017,
-        'USER': '',
-        'PASSWORD': '',
+        'HOST': 'mongodb+srv://questionsDev:QuestionsDev@cluster0-vjtpx.gcp.mongodb.net/questions?retryWrites=true&w=majority'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -154,4 +166,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/build/'
+STATIC_ROOT = '/static/build/static/'
+STATICFILES_DIRS = ['/static/build/']

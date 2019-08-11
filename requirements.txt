@@ -4,7 +4,8 @@ colorama==0.4.1
 dataclasses==0.6
 Django==2.2.1
 djangorestframework==3.9.3
-djongo==1.2.32
+djongo==1.2.33
+dnspython==1.16.0
 isort==4.3.18
 lazy-object-proxy==1.4.0
 mccabe==0.6.1
