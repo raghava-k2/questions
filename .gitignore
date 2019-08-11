@@ -9,7 +9,7 @@
 /static/coverage
 
 # production
-/static/build
+#/static/build
 
 # misc
 /**/__pycache__
