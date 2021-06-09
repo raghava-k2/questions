@@ -2,7 +2,7 @@ astroid==2.2.5
 autopep8==1.4.4
 colorama==0.4.1
 dataclasses==0.6
-Django==2.2.1
+Django==2.2.22
 djangorestframework==3.9.3
 djongo==1.2.33
 dnspython==1.16.0
